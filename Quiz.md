@@ -3,7 +3,7 @@
 ## 문제 1
 
 문제가 있습니다.
-Empty Tag 추가해 주어야 함.
+Empty Tag 추가해 주어야 합니다.
 
 ```
 const App = () => {
@@ -19,7 +19,7 @@ const App = () => {
 
 ## 문제 2
 
-useState 의 setState는 비동기로 동작한다.
+useState 의 setState는 비동기로 동작합니다.
 
     setState를 동기적으로 실행시키는 방법
     1. 콜백함수 이용 <비동기 함수 많아지면 끝도 없는 depths>
@@ -118,6 +118,5 @@ const App = () => {
 2. Console 창에 아무것도 뜨지 않는다.
 
 ## 문제 9
-
 React 에서 볼 때 onAdd1과 onAdd2는 다르다.
 onAdd1 은 App Component 리랜더링에 영향을 받지 않지만, onAdd2는 리랜더링에 영향을 받는다.
