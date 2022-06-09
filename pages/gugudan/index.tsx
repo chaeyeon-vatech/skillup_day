@@ -2,7 +2,7 @@ import type {NextPage} from "next";
 import {useRouter} from "next/router";
 import React, {useState, useRef} from "react";
 import {Navigation} from "../../components/Navigation";
-import { GuguContainer } from "./styled";
+import { DefaultContainer } from "../styled";
 
 type ValueType = {
     first: number;
@@ -37,7 +37,7 @@ const GugudanComponent: NextPage<ValueType> = values => {
     return (
         <>
             <Navigation/>
-            <GuguContainer>
+            <DefaultContainer>
                 <h2>
                     {values.first} 곱하기 {values.second}는?
                 </h2>
@@ -52,7 +52,7 @@ const GugudanComponent: NextPage<ValueType> = values => {
                     <button type={"submit"}>입력</button>
                 </form>
                 <div>{result}</div>
-            </GuguContainer>
+            </DefaultContainer>
         </>
     );
 };

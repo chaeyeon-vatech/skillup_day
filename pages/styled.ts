@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 
-export const GuguContainer = styled("div", {
-    label: "GuguContainer"
+export const DefaultContainer = styled("div", {
+    label: "DefaultContainer"
 })<{}>(() => {
     return {
         position: "fixed",
