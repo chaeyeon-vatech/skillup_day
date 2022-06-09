@@ -3,7 +3,9 @@
 # 📁 skillup_day
 제로초 웹 게임을 만들며 배우는 React 강좌를 활용한 Skill Up Project
 
+## 0. Overview
 
+![Overview of project](/Users/vatech/Desktop/스크린샷 2022-06-09 오후 3.48.11.png)
 
 ## 1. 개념 정리
 [개념 정리 Link
