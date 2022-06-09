@@ -1,34 +1,21 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
 
-First, run the development server:
+# 📁 skillup_day
+제로초 웹 게임을 만들며 배우는 React 강좌를 활용한 Skill Up Project
 
-```bash
-npm run dev
-# or
-yarn dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## 1. 개념 정리
+[개념 정리 Link
+](https://2a7.notion.site/Skill-up-Day-a081d794f8664b7bba656708246a91ce)
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## 2. Quiz
+[Quiz Link
+](https://github.com/chaeyeon-vatech/skillup_day/blob/main/Quiz.md)
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## 3. 사용언어, 기술스택
+![Generic badge](https://img.shields.io/badge/library-react-blue.svg) ![Generic badge](https://img.shields.io/badge/framework-nextjs-white.svg)
+![Generic badge](https://img.shields.io/badge/api-@emotion/styled-yellow.svg)  ![Generic badge](https://img.shields.io/badge/language-Typescript-important.svg)
+<br>
