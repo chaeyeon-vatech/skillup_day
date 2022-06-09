@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- library 다운로드 해줘야 함.-->
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+<body>
+
+<!-- #root에 react로 생성한 dom 객체를 삽입 -->
+<!--결과 : <div id = "root"-->
+<div id="root"></div>
+
+<!-- text/babel 타입을 넣어주어야 babel-loader가 인식할 수 있다. -->
+<script type="text/babel">
+
+    class LikeButton extends React.Component {
+        constructor(props) {
+            super(props); // class 함수 내부에서 this로 접근 가능
+
+            // state 선언
+            this.state = {
+                liked: false
+            }
+        }
+
+        render() {
+            // jsx 문법
+            return (
+                <button type="submit" onClick={() => {
+                    this.setState({liked: true})
+                }}>
+                    {this.state.liked === true ? 'Liked' : 'Like'}
+                </button>
+            )
+
+        }
+    }
+</script>
+
+<!-- text/babel 타입 넣어주어야 babel-loader가 인식 가능 -->
+<script type="text/babel">
+    // ReactDom의 render 메소드를 통해 LikeButton 컴포넌트를 #root에 생성 => 삽입.
+    ReactDOM.render(<LikeButton/>, document.querySelector('#root'))
+</script>
+</body>
+</html>
