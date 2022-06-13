@@ -67,7 +67,7 @@ const WordQuizComponent: NextPage = () => {
                     <input {...register('ifNotStringError')}/>
                     <div>{errors.ifNotStringError?.message}</div>
 
-                    <h4>React-hook-form 관련 INPUT : </h4>
+                    <h4>영어만 입력되는 INPUT FIELD 입니다 : </h4>
                     <Controller
                         name={"hookformValue"}
                         control={control}

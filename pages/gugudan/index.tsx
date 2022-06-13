@@ -76,8 +76,7 @@ const GugudanComponent: NextPage<ValueType> = values => {
                         {...register('ifNotNumberError')}
                     />
 
-                    <h4>React-hook-form 관련 INPUT : </h4>
-
+                    <h4>숫자만 입력되는 INPUT FIELD 입니다 : </h4>
                     <Controller
                         name={"hookformValue"}
                         control={control}
