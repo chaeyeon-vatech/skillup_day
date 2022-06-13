@@ -12,7 +12,8 @@ import {DefaultContainer, ErrorComponent} from "../../components/styled";
 const validationSchema = Yup.object().shape({
     ifNotStringError: Yup.string()
         .required('Register Sample is required')
-        .matches(/^[aA-zZ\s]+$/, "영어만 입력 가능합니다! ")
+        .matches(/^[aA-zZ\s]+$/, "영어만 입력 가능합니다! "),
+    hookformValue: Yup.number().nullable()
 });
 
 const WordQuizComponent: NextPage = () => {

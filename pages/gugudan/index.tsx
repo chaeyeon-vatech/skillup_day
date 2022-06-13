@@ -6,7 +6,7 @@ import {useForm, Controller} from "react-hook-form";
 import {yupResolver} from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import IMask from "imask";
-import { DefaultContainer, ErrorComponent } from "../../components/styled";
+import {DefaultContainer, ErrorComponent} from "../../components/styled";
 
 type ValueType = {
     first: number;
@@ -18,7 +18,7 @@ const validationSchema = Yup.object().shape({
     ifNotNumberError: Yup.number()
         .required('Register Sample is required')
         .typeError('Number 형식으로 입력해야 합니다!'),
-    hookformValue: Yup.number()
+    hookformValue: Yup.number().nullable()
 
 });
 
