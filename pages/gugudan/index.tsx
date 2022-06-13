@@ -71,10 +71,12 @@ const GugudanComponent: NextPage<ValueType> = values => {
                         });
                 }}>
                     <h4>위 질문에 대한 답을 입력하는 INPUT FIELD 입니다. : </h4>
+
                     {/*숫자만 입력 가능*/}
                     <input
                         {...register('ifNotNumberError')}
                     />
+                    <ErrorComponent>{errors.ifNotNumberError?.message}</ErrorComponent>
                     <button type={"submit"}>입력</button>
 
                     <div>{result}</div>
@@ -83,23 +85,22 @@ const GugudanComponent: NextPage<ValueType> = values => {
                     <Controller
                         name={"hookformValue"}
                         control={control}
-                        defaultValue={""}
+                        defaultValue={null}
                         render={props => {
                             const {onBlur, onChange, ref, value} = props.field
                             return (
                                 <input
                                     ref={ref}
                                     type={"text"}
-                                    value={value}
+                                    value={value||""}
                                     onChange={e => onChange(numberPipe(e.target.value))}
                                     onBlur={onBlur}
-
                                 />
                             )
                         }}
                     />
 
-                    <ErrorComponent>{errors.ifNotNumberError?.message}</ErrorComponent>
+                    <ErrorComponent>{errors.hookformValue?.message}</ErrorComponent>
                 </form>
 
             </DefaultContainer>
