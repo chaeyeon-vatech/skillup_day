@@ -2,7 +2,10 @@ import type {NextPage} from "next";
 import {useRouter} from "next/router";
 import React, {useState, useRef} from "react";
 import {Navigation} from "../../components/Navigation";
-import { DefaultContainer } from "../styled";
+import {DefaultContainer} from "../styled";
+import {useForm} from "react-hook-form";
+import {yupResolver} from '@hookform/resolvers/yup';
+import * as Yup from 'yup';
 
 type ValueType = {
     first: number;
@@ -11,27 +14,37 @@ type ValueType = {
 
 const GugudanComponent: NextPage<ValueType> = values => {
     const {first, second} = values;
-    const [inputValue, setInputValue] = useState('');
     const [result, setResult] = useState('');
-    const inputRef = useRef<HTMLInputElement>(null);
+
+    // form validation rules
+    const validationSchema = Yup.object().shape({
+        ifNotNumberError: Yup.number()
+            .required('Register Sample is required')
+            .typeError('Number 형식으로 입력해야 합니다!')
+
+    });
+
+    // useForm의 return 값인 methods로 form 데이터를 관리할 수 있다.
+    const {
+        register,
+        handleSubmit,
+        reset,
+        formState
+    } = useForm({resolver: yupResolver(validationSchema)});
+
+    const {errors} = formState;
 
     const router = useRouter();
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        const input = inputRef.current;
-
-        if (parseInt(inputValue) === first * second) {
+    const handleonSubmit = (e: any) => {
+        console.log("E >>>", e)
+        if (e.ifNotNumberError === first * second) {
             setResult('정답!');
-            setInputValue('')
             router.replace(router.asPath);
-        } else {
-            setResult('땡!');
-            setInputValue('');
-            if (input) {
-                input.focus();
-            }
+        }else{
+            setResult('땡!')
         }
+        reset()
     };
 
     return (
@@ -42,13 +55,18 @@ const GugudanComponent: NextPage<ValueType> = values => {
                     {values.first} 곱하기 {values.second}는?
                 </h2>
 
-                <form onSubmit={e => handleSubmit(e)}>
+                <form onSubmit={(e) => {
+                    handleSubmit(handleonSubmit)(e)
+                        .catch((err) => {
+                            console.error(err)
+                        });
+                }}>
+                    {/*숫자만 입력 가능*/}
                     <input
-                        ref={inputRef}
-                        type={"text"}
-                        value={inputValue}
-                        onChange={e => setInputValue(e.target.value)}
+                        {...register('ifNotNumberError')}
                     />
+
+                    <div>{errors.ifNotNumberError?.message}</div>
                     <button type={"submit"}>입력</button>
                 </form>
                 <div>{result}</div>
