@@ -2,11 +2,11 @@ import type {NextPage} from "next";
 import {useRouter} from "next/router";
 import React, {useState, useRef} from "react";
 import {Navigation} from "../../components/Navigation";
-import {DefaultContainer, ErrorComponent} from "../styled";
 import {useForm, Controller} from "react-hook-form";
 import {yupResolver} from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import IMask from "imask";
+import { DefaultContainer, ErrorComponent } from "../../components/styled";
 
 type ValueType = {
     first: number;
@@ -70,11 +70,14 @@ const GugudanComponent: NextPage<ValueType> = values => {
                             console.error(err)
                         });
                 }}>
-                    <h4>진짜 INPUT : </h4>
+                    <h4>위 질문에 대한 답을 입력하는 INPUT FIELD 입니다. : </h4>
                     {/*숫자만 입력 가능*/}
                     <input
                         {...register('ifNotNumberError')}
                     />
+                    <button type={"submit"}>입력</button>
+
+                    <div>{result}</div>
 
                     <h4>숫자만 입력되는 INPUT FIELD 입니다 : </h4>
                     <Controller
@@ -97,9 +100,8 @@ const GugudanComponent: NextPage<ValueType> = values => {
                     />
 
                     <ErrorComponent>{errors.ifNotNumberError?.message}</ErrorComponent>
-                    <button type={"submit"}>입력</button>
                 </form>
-                <div>{result}</div>
+
             </DefaultContainer>
         </>
     );

@@ -1,11 +1,11 @@
 import type {NextPage} from "next";
 import React, {useState, useRef} from "react";
 import {Navigation} from "../../components/Navigation";
-import {DefaultContainer, ErrorComponent} from "../styled";
 import * as Yup from "yup";
 import {Controller, useForm} from "react-hook-form";
 import {yupResolver} from '@hookform/resolvers/yup';
 import IMask from "imask";
+import {DefaultContainer, ErrorComponent} from "../../components/styled";
 
 
 // form validation rules
@@ -63,9 +63,14 @@ const WordQuizComponent: NextPage = () => {
                             console.error(err)
                         });
                 }}>
-                    <h4>진짜 INPUT : </h4>
+                    <h4>위 질문에 대한 답을 입력하는 INPUT FIELD 입니다. :</h4>
                     <input {...register('ifNotStringError')}/>
-                    <div>{errors.ifNotStringError?.message}</div>
+                    <ErrorComponent>{errors.ifNotStringError?.message}</ErrorComponent>
+
+                    <button type={"submit"} style={{marginBottom: 20}}>입력!</button>
+
+                    <div>{result}</div>
+
 
                     <h4>영어만 입력되는 INPUT FIELD 입니다 : </h4>
                     <Controller
@@ -87,9 +92,7 @@ const WordQuizComponent: NextPage = () => {
                         }}
                     />
                     <ErrorComponent>{errors.ifNotStringError?.message}</ErrorComponent>
-                    <button type={"submit"}>입력!</button>
                 </form>
-                <div>{result}</div>
             </DefaultContainer>
         </>
     );
