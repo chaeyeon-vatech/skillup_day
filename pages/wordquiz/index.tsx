@@ -1,10 +1,12 @@
 import type {NextPage} from "next";
 import React, {useState, useRef} from "react";
 import {Navigation} from "../../components/Navigation";
-import {DefaultContainer} from "../styled";
+import {DefaultContainer, ErrorComponent} from "../styled";
 import * as Yup from "yup";
-import {useForm} from "react-hook-form";
+import {Controller, useForm} from "react-hook-form";
 import {yupResolver} from '@hookform/resolvers/yup';
+import IMask from "imask";
+
 
 // form validation rules
 const validationSchema = Yup.object().shape({
@@ -22,9 +24,16 @@ const WordQuizComponent: NextPage = () => {
         register,
         handleSubmit,
         reset,
-        formState
+        formState,
+        control
     } = useForm({resolver: yupResolver(validationSchema)});
 
+    const alphabetFilter = /^[aA-zZ\s]*$/;
+
+
+    const alphabetPipe = IMask.createPipe({
+        mask: alphabetFilter
+    })
 
     const {errors} = formState;
 
@@ -54,8 +63,30 @@ const WordQuizComponent: NextPage = () => {
                             console.error(err)
                         });
                 }}>
+                    <h4>진짜 INPUT : </h4>
                     <input {...register('ifNotStringError')}/>
                     <div>{errors.ifNotStringError?.message}</div>
+
+                    <h4>React-hook-form 관련 INPUT : </h4>
+                    <Controller
+                        name={"hookformValue"}
+                        control={control}
+                        defaultValue={""}
+                        render={props => {
+                            const {onBlur, onChange, ref, value} = props.field
+                            return (
+                                <input
+                                    ref={ref}
+                                    type={"text"}
+                                    value={value}
+                                    onChange={e => onChange(alphabetPipe(e.target.value))}
+                                    onBlur={onBlur}
+
+                                />
+                            )
+                        }}
+                    />
+                    <ErrorComponent>{errors.ifNotStringError?.message}</ErrorComponent>
                     <button type={"submit"}>입력!</button>
                 </form>
                 <div>{result}</div>

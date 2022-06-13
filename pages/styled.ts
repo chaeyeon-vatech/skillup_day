@@ -14,3 +14,12 @@ export const DefaultContainer = styled("div", {
 
     };
 });
+
+export const ErrorComponent = styled("div", {
+    label: "ErrorComponent"
+})<{}>(() => {
+    return {
+        margin: 10,
+        color: "red"
+    };
+});

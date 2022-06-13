@@ -2,10 +2,11 @@ import type {NextPage} from "next";
 import {useRouter} from "next/router";
 import React, {useState, useRef} from "react";
 import {Navigation} from "../../components/Navigation";
-import {DefaultContainer} from "../styled";
-import {useForm} from "react-hook-form";
+import {DefaultContainer, ErrorComponent} from "../styled";
+import {useForm, Controller} from "react-hook-form";
 import {yupResolver} from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
+import IMask from "imask";
 
 type ValueType = {
     first: number;
@@ -16,7 +17,8 @@ type ValueType = {
 const validationSchema = Yup.object().shape({
     ifNotNumberError: Yup.number()
         .required('Register Sample is required')
-        .typeError('Number 형식으로 입력해야 합니다!')
+        .typeError('Number 형식으로 입력해야 합니다!'),
+    hookformValue: Yup.number()
 
 });
 
@@ -24,11 +26,19 @@ const GugudanComponent: NextPage<ValueType> = values => {
     const {first, second} = values;
     const [result, setResult] = useState('');
 
+    const numberFilter = /^[0-9]*$/;
+
+
+    const numberPipe = IMask.createPipe({
+        mask: numberFilter
+    })
+
     // useForm의 return 값인 methods로 form 데이터를 관리할 수 있다.
     const {
         register,
         handleSubmit,
         reset,
+        control,
         formState
     } = useForm({resolver: yupResolver(validationSchema)});
 
@@ -40,7 +50,7 @@ const GugudanComponent: NextPage<ValueType> = values => {
         if (e.ifNotNumberError === first * second) {
             setResult('정답!');
             router.replace(router.asPath);
-        }else{
+        } else {
             setResult('땡!')
         }
         reset()
@@ -60,12 +70,34 @@ const GugudanComponent: NextPage<ValueType> = values => {
                             console.error(err)
                         });
                 }}>
+                    <h4>진짜 INPUT : </h4>
                     {/*숫자만 입력 가능*/}
                     <input
                         {...register('ifNotNumberError')}
                     />
 
-                    <div>{errors.ifNotNumberError?.message}</div>
+                    <h4>React-hook-form 관련 INPUT : </h4>
+
+                    <Controller
+                        name={"hookformValue"}
+                        control={control}
+                        defaultValue={""}
+                        render={props => {
+                            const {onBlur, onChange, ref, value} = props.field
+                            return (
+                                <input
+                                    ref={ref}
+                                    type={"text"}
+                                    value={value}
+                                    onChange={e => onChange(numberPipe(e.target.value))}
+                                    onBlur={onBlur}
+
+                                />
+                            )
+                        }}
+                    />
+
+                    <ErrorComponent>{errors.ifNotNumberError?.message}</ErrorComponent>
                     <button type={"submit"}>입력</button>
                 </form>
                 <div>{result}</div>
