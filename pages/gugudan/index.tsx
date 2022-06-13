@@ -12,17 +12,17 @@ type ValueType = {
     second: number;
 };
 
+// form validation rules
+const validationSchema = Yup.object().shape({
+    ifNotNumberError: Yup.number()
+        .required('Register Sample is required')
+        .typeError('Number 형식으로 입력해야 합니다!')
+
+});
+
 const GugudanComponent: NextPage<ValueType> = values => {
     const {first, second} = values;
     const [result, setResult] = useState('');
-
-    // form validation rules
-    const validationSchema = Yup.object().shape({
-        ifNotNumberError: Yup.number()
-            .required('Register Sample is required')
-            .typeError('Number 형식으로 입력해야 합니다!')
-
-    });
 
     // useForm의 return 값인 methods로 form 데이터를 관리할 수 있다.
     const {
@@ -37,7 +37,6 @@ const GugudanComponent: NextPage<ValueType> = values => {
     const router = useRouter();
 
     const handleonSubmit = (e: any) => {
-        console.log("E >>>", e)
         if (e.ifNotNumberError === first * second) {
             setResult('정답!');
             router.replace(router.asPath);
