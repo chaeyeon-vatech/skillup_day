@@ -77,14 +77,14 @@ const WordQuizComponent: NextPage = () => {
                     <Controller
                         name={"hookformValue"}
                         control={control}
-                        defaultValue={""}
+                        defaultValue={null}
                         render={props => {
                             const {onBlur, onChange, ref, value} = props.field
                             return (
                                 <input
                                     ref={ref}
                                     type={"text"}
-                                    value={value}
+                                    value={value || ""}
                                     onChange={e => onChange(alphabetPipe(e.target.value))}
                                     onBlur={onBlur}
 
